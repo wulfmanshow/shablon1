@@ -1,0 +1,118 @@
+
+
+#include <iostream>
+#include <time.h>
+
+using namespace std;
+template <typename T>
+class Array
+{
+private:
+	T* arr;
+	int size, amountOfData,grow;
+	
+	void CopyArray(T* arr1, T* arr2)
+	{
+		for (int i = 0; i < amountOfData; i++)
+			arr1[i] = arr2[i];
+	}
+	void CreateArray(int size)
+	{
+		this->size = size;
+		amountOfData = size;
+		arr = new T[size];
+		for (int i = 0; i < size; i++)
+			arr[i] = rand() % 10;
+	}
+public:
+	Array() : arr{ nullptr }, size{ 0 }, amountOfData{ 0 } {};
+	~Array() {
+		delete[] arr;
+	}
+	void InsertAt() {
+		arr[position] = symbol;
+	}
+	void InsertSymbol() {
+		cout << "Position: ";
+		cin >> position;
+		if (i < size) {
+			cout<<"Array is too small: "
+		}
+		cout << "Symbol: ";
+		cin >> symbol;
+		InsertAt();
+	}
+	int GetSize() {
+		return size;
+	}
+	int GetUpperBound() {
+		return amountOfData;
+	}
+	bool IsEmpty() {
+		return size == 0;
+	}
+
+	void SetSize(int size, int grow = 1)
+	{
+		if (IsEmpty())
+			CreateArray(size);
+		this->grow = grow;
+	}
+	
+	void Resize(int grow)
+	{
+		if (grow == 0) return;
+
+		size = size + grow;
+		T* copiedArray = new T[size];
+		CopyArray(copiedArray, arr);
+
+		delete[] arr;
+		arr = copiedArray;
+		copiedArray = nullptr;
+	}
+	T operator[](int index) const
+	{
+		return arr[index];
+	}
+	T& operator [] (int index)
+	{
+		return arr[index];
+	}
+	T GetAt(int index) {
+		return arr[index];
+	}
+	void setAt(int index,T value) {
+		arr[index] = value;
+	}
+	void removeAll() {
+		delete[]arr;
+		size = 0;
+		amountOfData = 0;
+	}
+	void Add(T element) {
+		if (grow == 0) return;
+		if (size == GetUpperBound() ) { Resize(grow); }
+		arr[GetUpperBound()]  = element;
+	}
+
+		
+	
+};
+int main()
+{
+	Array<int> A;
+	A.SetSize(5, 5);
+	A.Add(9);
+	
+	for (int i = 0; i <= A.GetUpperBound(); i++) {
+		cout << A[i]<<endl;
+	}
+	
+
+	/*cout << A.GetSize()<<endl;
+	cout << A.GetUpperBound() << endl;
+	cout << A.GetAt(3) << endl;
+	cout << A[2] << endl;*/
+
+}
